@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@source "../views";
+
+
+@layer base {
+    :root {
+      --color-black: #060606; /* Your custom color */
+    }
+    .text-2xs {
+      font-size: 0.625rem; /* 10px */
+    }
+    body {
+      font-family: "Hanken Grotesk", sans-serif;
+    }
+  }
