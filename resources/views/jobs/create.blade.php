@@ -1,7 +1,7 @@
 <x-layout>
     <x-page-heading>New Job</x-page-heading>
 
-    <x-forms.form method="PATCH" action="/jobs">
+    <x-forms.form method="POST" action="/jobs">
         <x-forms.input label="Title" name="title" placeholder="CEO"/>
         <x-forms.input label="Salary" name="salary" placeholder="£90,000 GBP"/>
         <x-forms.input label="Location" name="location" placeholder="Yeovil Junction"/>
