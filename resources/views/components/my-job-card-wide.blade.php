@@ -15,11 +15,14 @@
     </div>
 
     <div class="flex flex-col">
-        <div class="flex flex-wrap gap-2"> <!-- Tags will be in a horizontal row with wrapping if needed -->
+        <div class="flex flex-wrap gap-2 self-end"> <!-- Tags will be in a horizontal row with wrapping if needed -->
             @foreach ($job->tags as $tag )
                 <x-tag :$tag/> <!-- Render each tag -->
             @endforeach
         </div>
-        <a href="jobs/{{$job->id}}/edit" class="mt-auto self-end"><x-forms.button>Edit Job</x-forms.button></a>
+        <div class="flex mt-auto self-end space-x-3">
+            <a href="jobs/{{$job->id}}/edit"><x-forms.button>Edit Job</x-forms.button></a>
+            <a href="myjobs/{{$job->id}}/applicants"><x-forms.button>View Applicants</x-forms.button></a>
+        </div>
     </div>
 </x-panel>

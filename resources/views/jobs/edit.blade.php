@@ -15,7 +15,11 @@
 
         <x-forms.input label="Tags (comma seperated)" name="tags" value="{{ $job->tags->pluck('name')->implode(', ') }}" placeholder="frontend, ux design, developer"/>
 
-        <x-forms.button type="submit">Edit</x-forms.button>
+        <div class="space-x-4">
+            <x-forms.button type="submit">Edit</x-forms.button>
+            <x-forms.button class="bg-red-800 hover:bg-red-700" form="delete">Delete</x-forms.button>
+        </div>
         
     </x-forms.form>
+        <x-forms.form method="delete" id="delete" action="/jobs/{{ $job->id }}"></x-forms.form>
 </x-layout>

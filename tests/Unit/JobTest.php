@@ -22,6 +22,7 @@ namespace Tests\Unit;
 
 use App\Models\Employer;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -50,6 +51,19 @@ class JobTest extends TestCase
 
         // Assert that the job has 1 tag
         $this->assertCount(1, $job->tags);
+    }
+
+    //test for job applications
+
+    public function test_user_can_apply_to_a_job(): void
+    {
+        $user = User::factory()->create(); //create a user and a job
+        $job = Job::factory()->create();
+
+        $user->appliedJobs()->attach($job->id, ['applied_at' => now(), 'status' => 'pending']); 
+
+        $this->assertTrue($user->appliedJobs->contains($job));
+        $this->assertTrue($job->applicants->contains($user));
     }
 
 }   

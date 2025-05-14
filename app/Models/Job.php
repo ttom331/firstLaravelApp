@@ -23,4 +23,8 @@ class Job extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
+
+    public function applicants(){
+        return $this->belongsToMany(User::class)->withPivot('applied_at', 'status');
+    }
 }

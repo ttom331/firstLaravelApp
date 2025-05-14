@@ -40,7 +40,7 @@ class JobController extends Controller
 
     public function create()
     {
-        return view('jobs/create');
+        return view('jobs.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class JobController extends Controller
             new JobPosted($job)
         );
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Job has been created successfully!');
 
 
     }
@@ -109,6 +109,13 @@ class JobController extends Controller
             }
         }
         return redirect("/jobs/{$job->id}");
+    }
+
+    public function destroy(Job $job){
+        $job->delete();
+
+        return redirect('/')->with('success', 'Job has been deleted successfully!');
+
     }
 
 }

@@ -23,7 +23,9 @@
             @endforeach
         </div>
         @role('job_seeker') 
-            <x-forms.button class="mt-auto self-end">Apply</x-forms.button> <!-- Only job seekers will see the apply button -->
+            <a class="mt-auto self-end" href="/jobs/{{ $job->id }}/apply">
+                <x-forms.button>Apply</x-forms.button> <!-- Only job seekers will see the apply button -->
+            </a>
         @endrole
     </div>
 </x-panel>

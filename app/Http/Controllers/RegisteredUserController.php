@@ -44,17 +44,24 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Password::min(6)],
             'role_id' => ['required', 'exists:roles,id'], //checks the role id exists in table, should always be working as its a dropdwon
             'employer' => ['required_if:role_id,1'],
-            'logo' => ['required_if:role_id,1', File::types(['png', 'jpg', 'webp'])]
+            'logo' => ['required_if:role_id,1', File::types(['png', 'jpg', 'webp'])],
+            'cv_path' => ['nullable', 'file']
         ]);
 
-        $userAttributes = collect($attributes)->only(['name', 'email', 'password'])->toArray();
-        $role_id = $attributes['role_id'];
-       
-        $user = User::create($userAttributes);
 
-        $user->roles()->attach($role_id);
+        $role_id = $attributes['role_id'];
 
         $rolename = Role::find($role_id)->name;  // ?-> null safe operator
+
+        if ($rolename === 'job_seeker' ){
+            $cvpath = $request->file('cv_path')->store('cv', 'private'); //stores the cv file in a private folder
+            $userAttributes = collect($attributes)->only(['name', 'email', 'password'])->put('cv_path', $cvpath)->toArray(); //put('cv_path, $cvpath) takes new cvpath and puts in back into attributes
+        }else{
+            $userAttributes = collect($attributes)->only(['name', 'email', 'password'])->toArray(); //put('cv_path, $cvpath) takes new cvpath and puts in back into attributes
+        }
+
+        $user = User::create($userAttributes);
+        $user->roles()->attach($role_id);
 
         if ($rolename === 'employer'){
 

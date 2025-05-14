@@ -38,6 +38,11 @@ return [
             'report' => false,
         ],
 
+        'private' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private'), // Custom location for private files
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -54,4 +54,13 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+
+    
+    
+    public function appliedjobs(){
+        
+        return $this->belongsToMany(Job::class)->withPivot('applied_at', 'status')
+                ->withTimestamps();;
+
+    }
 }

@@ -1,10 +1,10 @@
-@props(['label', 'name'])
+@props(['label', 'name', 'padding' => 'px-5 py-4', 'radius' => 'rounded-xl'])
 
 @php
     $defaults = [
         'id' => $name,
         'name' => $name,
-        'class' => 'rounded-xl bg-white/10 border border-white/10 px-5 py-4 w-full'
+        'class' => "$radius bg-white/10 border border-white/10 w-full $padding"
     ];
 @endphp
 
